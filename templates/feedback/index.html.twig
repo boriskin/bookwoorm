@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FeedbackController!{% endblock %}
+
+{% block body %}
+    <div>
+        Заполни все поля формы:
+        {{ form_start(feedback_form) }}
+        {{ form_widget(feedback_form) }}
+        <button type="submit" class="btn btn-primary">Отправить</button>
+        {{ form_end(feedback_form) }}
+    </div>
+{% endblock %}
