@@ -1,8 +1,32 @@
 {% extends 'base.html.twig' %}
 
-
-{% block title %}Home{% endblock title %}
+{% block title %}Главная{% endblock title %}
 
 {% block body %}
-    Welcome to bookwoorm!
+    <main role="main">
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">Добро пожаловать!</h1>
+                <p>Поехали! Это мое первое веб-приложение...</p>
+                <p><a class="btn btn-bookwoorm  btn-lg" href="https://github.com/boriskin/bookwoorm" role="button"><i class="fab fa-github"></i> Подробнее &raquo;</a></p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2>Symfony</h2>
+                    <p>PHP-фреймворк позволяет легко решать рутинные задачи веб-программиста</p>
+                    <p><a class="btn btn-secondary" href="#" role="button">Подробнее &raquo;</a></p>
+                </div>
+                <div class="col-md-4">
+                    <h2>Docker</h2>
+                    <p>Переносимые автономные контейнеры выполняются в облаке или локальной среде</p>
+                    <p><a class="btn btn-secondary" href="https://www.docker.com" role="button">Подробнее &raquo;</a></p>
+                </div>
+                <h2>Webpack</h2>
+                <p>Модульный сборщик JavaScript позволяет объединять ресурсы и библиотеки</p>
+                <p><a class="btn btn-secondary" href="https://webpack.js.org" role="button">Подробнее &raquo;</a></p>
+            </div>
+        </div>
+    </main>
 {% endblock %}

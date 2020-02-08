@@ -24,6 +24,7 @@ services:
       depends_on:
        - php-fpm
        - mysql
+       - encore
 
     php-fpm:
       build: docker/php-fpm
@@ -39,7 +40,7 @@ services:
       container_name: encore
       working_dir: /app
       volumes:
-        - .:/app
+        - ./:/app
       ports:
         - "8080:8080"
       command: ["yarn", "dev-server", "--host=0.0.0.0"]
