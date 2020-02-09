@@ -10,7 +10,7 @@ services:
         MYSQL_USER: "${MYSQL_DB_USERNAME}"
         MYSQL_PASSWORD: "${MYSQL_DB_PASSWORD}"
       ports:
-        - "3306:3306"
+        - "${MYSQL_DB_PORT}:33060"
 
     nginx:
       image: nginx:alpine
@@ -22,11 +22,10 @@ services:
       ports:
         - "80:80"
       depends_on:
-       - php-fpm
-       - mysql
+       - app
        - encore
 
-    php-fpm:
+    app:
       build: docker/php-fpm
       container_name: app
       working_dir: /var/www/
@@ -34,6 +33,8 @@ services:
         - ./:/var/www
       ports:
         - "9000:9000"
+      depends_on:
+        - mysql
 
     encore:
       image: node:13-alpine

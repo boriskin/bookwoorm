@@ -20,4 +20,7 @@ require('bootstrap');
 
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
+    $(".alert").delay(4000).slideUp(200, function() {
+        $(this).alert('close');
+    });
 });

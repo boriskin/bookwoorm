@@ -20,5 +20,6 @@ class ApplicationAvailabilityFunctionalTest extends WebTestCase
     public function urlProvider()
     {
         yield ['/'];
+        yield ['/contact'];
     }
 }
