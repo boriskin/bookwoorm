@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Events\ContactFormSubmittedEvent;
 use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,7 +16,7 @@ class ContactController extends AbstractController
     /**
      * @Route("/contact", methods="GET|POST", name="contact")
      */
-    public function index(Request $request): Response
+    public function contactNew(Request $request, EventDispatcherInterface $eventDispatcher): Response
     {
         //создаем объект Contact
         $contact = new Contact();
@@ -22,7 +24,6 @@ class ContactController extends AbstractController
         $contact->setPublishedAt(new \DateTime('now'));
         //создаем форму
         $form = $this->createForm(ContactType::class, $contact);
-        //
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -34,10 +35,12 @@ class ContactController extends AbstractController
             $em->flush();
 
             //оповещаем клиента
-            $this->addFlash('success', 'Отправлено');
+            $this->addFlash('success', 'Успешно отправлено');
+            //событие произошло
+            $eventDispatcher->dispatch(new ContactFormSubmittedEvent($contact));
 
             //редирект
-            return $this->redirectToRoute('contact');
+            //return $this->redirectToRoute('contact');
         }
 
         return $this->render('contact/index.html.twig', [
