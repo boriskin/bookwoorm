@@ -20,8 +20,6 @@ class ContactController extends AbstractController
     {
         //создаем объект Contact
         $contact = new Contact();
-        //установим дата и время, т.к. на форме их нет
-        $contact->setPublishedAt(new \DateTime('now'));
         //создаем форму
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
@@ -39,12 +37,20 @@ class ContactController extends AbstractController
             //событие произошло
             $eventDispatcher->dispatch(new ContactFormSubmittedEvent($contact));
 
-            //редирект
-            //return $this->redirectToRoute('contact');
+            //$this->redirect('contact');
+            return $this->redirectToRoute('contact_thanks');
         }
 
-        return $this->render('contact/index.html.twig', [
+        return $this->render('contact/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/contact-thanks", methods="GET", name="contact_thanks")
+     */
+    public function contactThanks()
+         {
+             return $this->render('contact/thanks.html.twig');
+         }
 }

@@ -12,8 +12,6 @@ class ContactFormSubmittedEvent extends Event
     public function __construct(Contact $contact)
     {
         $this->contact = $contact;
-        //установим дата и время, т.к. на форме их нет
-        //$contact->setPublishedAt(new \DateTime('now'));
     }
 
     public function getContact(): Contact
