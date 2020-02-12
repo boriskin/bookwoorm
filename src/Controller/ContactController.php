@@ -38,7 +38,7 @@ class ContactController extends AbstractController
             $eventDispatcher->dispatch(new ContactFormSubmittedEvent($contact));
 
             //$this->redirect('contact');
-            return $this->redirectToRoute('contact_thanks');
+            //return $this->redirectToRoute('contact_thanks');
         }
 
         return $this->render('contact/new.html.twig', [

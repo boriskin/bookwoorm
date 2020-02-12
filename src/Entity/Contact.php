@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator\Constraints as SberbankAssert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContactRepository")
@@ -26,18 +27,22 @@ class Contact
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Email(
-     *     message = "Не является адресом электронной почты!"
+     *     message = "Не является адресом электронной почты!",
+     *     normalizer = "strtolower",
+     *     mode = "strict"
      * )
+     * @SberbankAssert\ConstraintSberbank()
      */
     private $email;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\Length(
-     *      min = 10,
-     *      max = 2000,
-     *      minMessage = "Должно быть минимум {{ limit }} символов!",
-     *      maxMessage = "Не может превышать {{ limit }} символов!"
+     *     allowEmptyString = false,
+     *     min = 10,
+     *     max = 2000,
+     *     minMessage = "Должно быть минимум {{ limit }} символов!",
+     *     maxMessage = "Не может превышать {{ limit }} символов!"
      * )
      */
     private $message;
