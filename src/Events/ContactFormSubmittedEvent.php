@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * Это мой первый проект Symfony
+ * (c) Pavel Boriskin <paboriskin@gmail.com>
+ */
+
 namespace App\Events;
 
 use App\Entity\Contact;
@@ -19,4 +24,3 @@ class ContactFormSubmittedEvent extends Event
         return $this->contact;
     }
 }
-

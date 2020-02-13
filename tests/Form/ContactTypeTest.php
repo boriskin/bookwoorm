@@ -1,11 +1,16 @@
 <?php
 
+/*
+ * Это мой первый проект Symfony
+ * (c) Pavel Boriskin <paboriskin@gmail.com>
+ */
+
 namespace App\Tests\Form\Type;
 
-use App\Form\ContactType;
 use App\Entity\Contact;
-use Symfony\Component\Form\Test\TypeTestCase;
+use App\Form\ContactType;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
+use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\Validator\Validation;
 
 class ContactTypeTest extends TypeTestCase
@@ -28,7 +33,7 @@ class ContactTypeTest extends TypeTestCase
         $formData = [
             'name' => 'name',
             'email' => 'email@host',
-            'message' => '1234567890123456789'
+            'message' => '1234567890123456789',
         ];
 
         $objectToCompare = new Contact();
@@ -44,7 +49,7 @@ class ContactTypeTest extends TypeTestCase
 
         $this->assertTrue($form->isSynchronized());
 
-        $this->assertEquals($object, $objectToCompare);
+        $this->assertSame($object, $objectToCompare);
 
         $view = $form->createView();
         $children = $view->children;

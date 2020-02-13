@@ -1,10 +1,15 @@
 <?php
 
+/*
+ * Это мой первый проект Symfony
+ * (c) Pavel Boriskin <paboriskin@gmail.com>
+ */
+
 namespace App\Entity;
 
+use App\Validator\Constraints as SberbankAssert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Validator\Constraints as SberbankAssert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContactRepository")
@@ -20,12 +25,14 @@ class Contact
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @Assert\Email(
      *     message = "Не является адресом электронной почты!",
      *     normalizer = "strtolower",
@@ -37,6 +44,7 @@ class Contact
 
     /**
      * @ORM\Column(type="text")
+     *
      * @Assert\Length(
      *     allowEmptyString = false,
      *     min = 10,

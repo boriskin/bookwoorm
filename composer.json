@@ -1,4 +1,6 @@
 {
+    "name": "boriskin/bookwoorm",
+    "description": "bookwoorm",
     "type": "project",
     "license": "proprietary",
     "require": {
@@ -23,6 +25,8 @@
     "require-dev": {
         "dama/doctrine-test-bundle": "^6.3",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "escapestudios/symfony2-coding-standard": "3.x-dev",
+        "friendsofphp/php-cs-fixer": "^2.16",
         "symfony/maker-bundle": "^1.14",
         "symfony/profiler-pack": "^1.0",
         "symfony/test-pack": "^1.0"

@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * Это мой первый проект Symfony
+ * (c) Pavel Boriskin <paboriskin@gmail.com>
+ */
+
 namespace App\Controller;
 
 use App\Entity\Contact;
@@ -50,7 +55,7 @@ class ContactController extends AbstractController
      * @Route("/contact-thanks", methods="GET", name="contact_thanks")
      */
     public function contactThanks()
-         {
-             return $this->render('contact/thanks.html.twig');
-         }
+    {
+        return $this->render('contact/thanks.html.twig');
+    }
 }

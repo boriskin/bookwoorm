@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * Это мой первый проект Symfony
+ * (c) Pavel Boriskin <paboriskin@gmail.com>
+ */
+
 namespace App\Form;
 
 use App\Entity\Contact;
@@ -14,14 +19,14 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('name', null, [
-                'label' => 'Ваше имя'
+                'label' => 'Ваше имя',
             ])
             ->add('email')
             ->add('message', null, [
-                'label' => 'Сообщение'
+                'label' => 'Сообщение',
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Отправить'
+                'label' => 'Отправить',
             ]);
     }
 

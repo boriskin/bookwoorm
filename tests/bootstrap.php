@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * Это мой первый проект Symfony
+ * (c) Pavel Boriskin <paboriskin@gmail.com>
+ */
+
 use Symfony\Component\Dotenv\Dotenv;
 
 if (isset($_ENV['BOOTSTRAP_CLEAR_CACHE_ENV'])) {

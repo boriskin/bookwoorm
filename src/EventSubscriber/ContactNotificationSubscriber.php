@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * Это мой первый проект Symfony
+ * (c) Pavel Boriskin <paboriskin@gmail.com>
+ */
+
 namespace App\EventSubscriber;
 
 use App\Events\ContactFormSubmittedEvent;
@@ -15,7 +20,6 @@ class ContactNotificationSubscriber implements EventSubscriberInterface
     {
         $this->mailer = $mailer;
     }
-
 
     public function onContactSubmittedEvent(ContactFormSubmittedEvent $event): void
     {

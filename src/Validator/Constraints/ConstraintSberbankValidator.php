@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * Это мой первый проект Symfony
+ * (c) Pavel Boriskin <paboriskin@gmail.com>
+ */
+
 namespace App\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
@@ -24,12 +29,11 @@ class ConstraintSberbankValidator extends ConstraintValidator
         if (!is_string($value)) {
             // throw this exception if your validator cannot handle the passed type so that it can be marked as invalid
             throw new UnexpectedValueException($value, 'string');
-
             // separate multiple types using pipes
             // throw new UnexpectedValueException($value, 'string|int');
         }
 
-        if (preg_match('/^[-A-Za-z0-9_.]+@+[-A-Za-z0-9_]*.*(sberbank.ru|sbrf.ru)$/', strtolower($value), $matches)) {
+        if (preg_match('/^[-A-Za-z0-9_.]+@+[-A-Za-z0-9_]*.*(sberbank.ru|sbrf.ru)$/', mb_strtolower($value), $matches)) {
             // the argument must be a string or an object implementing __toString()
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ string }}', $value)

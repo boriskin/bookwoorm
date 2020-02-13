@@ -1,0 +1,40 @@
+language: php
+sudo: false
+
+#services:
+#  - mysql
+
+cache:
+  yarn: true
+  directories:
+    - $HOME/.composer/cache/files
+    - ./bin/.phpunit
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.4
+    - php: hhvm
+  allow_failures:
+    - php: hhvm
+
+before_install:
+  - composer self-update
+
+install:
+  - composer install
+  - ./bin/phpunit install
+  #- yarn install && yarn encore production
+
+script:
+  - ./bin/phpunit
+  - ./composer validate --no-check-all --strict
+  #- symfony security:check
+  - ./bin/console lint:yaml config --parse-tags
+  - ./bin/console lint:twig templates --env=prod
+  - ./bin/console lint:container
+  - ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
+  - composer validate
+
+notifications:
+  email: paboriskin@gmail.com
