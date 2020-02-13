@@ -29,7 +29,7 @@ install:
 
 script:
   - ./bin/phpunit
-  - ./composer validate --no-check-all --strict
+  - composer validate --no-check-all --strict
   #- symfony security:check
   - ./bin/console lint:yaml config --parse-tags
   - ./bin/console lint:twig templates --env=prod
