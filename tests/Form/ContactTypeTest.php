@@ -49,7 +49,8 @@ class ContactTypeTest extends TypeTestCase
 
         $this->assertTrue($form->isSynchronized());
 
-        $this->assertSame($object, $objectToCompare);
+        //проверям что объект не меняется после подписания на форме
+        $this->assertEquals($object, $objectToCompare);
 
         $view = $form->createView();
         $children = $view->children;
