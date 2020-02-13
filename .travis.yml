@@ -19,7 +19,8 @@ matrix:
     - php: hhvm
 
 before_install:
-  #- composer self-update
+  - composer self-update
+  - yarn install && yarn encore dev
 
 install:
   - composer install
