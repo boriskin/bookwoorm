@@ -19,7 +19,7 @@ matrix:
     - php: hhvm
 
 before_install:
-  - composer self-update
+  #- composer self-update
 
 install:
   - composer install
