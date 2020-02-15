@@ -19,7 +19,7 @@ before_install:
 
 install:
   - composer install
-  - yarn install
+  - yarn install && yarn encore dev
   - ./bin/phpunit install
 
 script:
@@ -29,10 +29,10 @@ script:
   - ./bin/console lint:twig templates --show-deprecations
   - ./bin/console lint:container
   - ./bin/console doctrine:database:create --env=test
-  #- ./bin/console doctrine:migrations:migrate --no-interaction
-  #- ./bin/console doctrine:migrations:migrate first --no-interaction
-  #- ./bin/console doctrine:migrations:migrate --no-interaction
-  - ./bin/console doctrine:schema:validate --skip-sync --no-interaction
+  - ./bin/console doctrine:migrations:migrate --no-interaction --env=test
+  - ./bin/console doctrine:migrations:migrate first --no-interaction --env=test
+  - ./bin/console doctrine:migrations:migrate --no-interaction --env=test
+  - ./bin/console doctrine:schema:validate --skip-sync --no-interaction --env=test
   - ./bin/phpunit
 
 deploy:
