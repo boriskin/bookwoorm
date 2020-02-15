@@ -42,6 +42,7 @@ deploy:
   api_key: "$HEROKU_API_KEY"
   edge: true # opt in to dpl v2
   cleanup: true
+  - ./bin/console doctrine:database:create
 
 notifications:
   email: paboriskin@gmail.com
