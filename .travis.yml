@@ -38,10 +38,10 @@ script:
 
 deploy:
   provider: heroku
-  cleanup: true
   app: "bookwoorm"
-  api_key:
-    secure: "$HEROKU_API_KEY"
+  api_key: "$HEROKU_API_KEY"
+  edge: true # opt in to dpl v2
+  cleanup: true
 
 notifications:
   email: paboriskin@gmail.com
