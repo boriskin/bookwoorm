@@ -35,16 +35,13 @@ script:
   - ./bin/console doctrine:schema:validate --skip-sync --no-interaction --env=test
   - ./bin/phpunit
 
+
 deploy:
   provider: heroku
   app: "bookwoorm"
   api_key: "$HEROKU_API_KEY"
   edge: true # opt in to dpl v2
   cleanup: true
-
-after_deploy:
-  - composer dump-env prod
-  - yarn encore production --progress
 
 notifications:
   email: paboriskin@gmail.com
