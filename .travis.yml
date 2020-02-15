@@ -22,12 +22,13 @@ matrix:
 
 before_install:
   - composer self-update
+  - composer config extra.symfony.require $SYMFONY
   - yarn install && yarn encore dev
 
 install:
   - composer install
   - ./bin/phpunit install
-  #- yarn install && yarn encore production
+  #- ./bin/console doctrine:database:create
 
 script:
   - ./bin/phpunit
