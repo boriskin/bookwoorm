@@ -37,11 +37,11 @@ script:
   - ./bin/phpunit
 
 deploy:
-  cleanup: true
   provider: heroku
   app: "bookwoorm"
   api_key:
     secure: "$HEROKU_API_KEY"
-
+  edge: true
+  cleanup: true
 notifications:
   email: paboriskin@gmail.com
