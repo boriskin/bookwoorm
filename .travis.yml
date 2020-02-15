@@ -36,5 +36,11 @@ script:
   - ./bin/console doctrine:schema:validate --skip-sync --no-interaction
   - ./bin/phpunit
 
+deploy:
+  provider: heroku
+  app: "bookwoorm"
+  api_key:
+    secure: "7dcf578c-062a-4585-b613-104897f5c5df"
+
 notifications:
   email: paboriskin@gmail.com
