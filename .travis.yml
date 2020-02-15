@@ -8,9 +8,8 @@ cache:
   yarn: true
   directories:
     - $HOME/.composer/cache/files
+    - $HOME/.symfony
     - ./bin/.phpunit
-env:
-  - SYMFONY_VERSION="4.4.*" DB=mysql
 
 matrix:
   fast_finish: true
@@ -33,12 +32,12 @@ install:
 script:
   - ./bin/phpunit
   - composer validate --no-check-all --strict
-  - symfony security:check
   - ./bin/console lint:yaml config --parse-tags
   - ./bin/console lint:twig templates --env=prod
   - ./bin/console lint:container
   - ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
   - composer validate
+  - $HOME/.symfony/bin/symfony security:check
 
 notifications:
   email: paboriskin@gmail.com
