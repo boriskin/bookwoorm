@@ -22,7 +22,7 @@ matrix:
 
 before_install:
   - composer self-update
-  - composer config extra.symfony.require $SYMFONY
+  - composer config extra.symfony.require $SYMFONY_VERSION
   - yarn install && yarn encore dev
 
 install:
