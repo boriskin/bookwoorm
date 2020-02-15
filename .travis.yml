@@ -37,6 +37,7 @@ script:
   - ./bin/phpunit
 
 deploy:
+  cleanup: true
   provider: heroku
   app: "bookwoorm"
   api_key:
