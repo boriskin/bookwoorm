@@ -30,14 +30,16 @@ install:
   #- ./bin/console doctrine:database:create
 
 script:
-  - ./bin/phpunit
+  - $HOME/.symfony/bin/symfony security:check
   - composer validate --no-check-all --strict
   - ./bin/console lint:yaml config --parse-tags
-  - ./bin/console lint:twig templates --env=prod
+  - ./bin/console lint:twig templates --show-deprecations
   - ./bin/console lint:container
-  - ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
-  - composer validate
-  - $HOME/.symfony/bin/symfony security:check
+  #- ./bin/console doctrine:migrations:migrate --no-interaction
+  #- ./bin/console doctrine:migrations:migrate first --no-interaction
+  #- ./bin/console doctrine:migrations:migrate --no-interaction
+  - ./bin/console doctrine:schema:validate --skip-sync --no-interaction
+  - ./bin/phpunit
 
 notifications:
   email: paboriskin@gmail.com
