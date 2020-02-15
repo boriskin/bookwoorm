@@ -16,12 +16,11 @@ cache:
 before_install:
   - composer self-update
   - wget https://get.symfony.com/cli/installer -O - | bash
-  - yarn install && yarn encore dev
 
 install:
   - composer install
+  - yarn install
   - ./bin/phpunit install
-  - ./bin/console doctrine:database:create
 
 script:
   - $HOME/.symfony/bin/symfony security:check
@@ -29,6 +28,7 @@ script:
   - ./bin/console lint:yaml config --parse-tags
   - ./bin/console lint:twig templates --show-deprecations
   - ./bin/console lint:container
+  - ./bin/console doctrine:database:create --env=test
   #- ./bin/console doctrine:migrations:migrate --no-interaction
   #- ./bin/console doctrine:migrations:migrate first --no-interaction
   #- ./bin/console doctrine:migrations:migrate --no-interaction
