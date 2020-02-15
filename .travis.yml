@@ -40,7 +40,7 @@ deploy:
   provider: heroku
   app: "bookwoorm"
   api_key:
-    secure: "HEROKU_API_KEY"
+    secure: "$HEROKU_API_KEY"
 
 notifications:
   email: paboriskin@gmail.com
