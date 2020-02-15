@@ -31,3 +31,6 @@ yarn-error.log
 /.phpcs-cache
 /phpcs.xml
 ###< squizlabs/php_codesniffer ###
+
+###  https://help.heroku.com/0KU2EM53
+yarn.lock
