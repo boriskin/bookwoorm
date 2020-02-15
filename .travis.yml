@@ -4,11 +4,10 @@ sudo: false
 php:
   - 7.4
 
-#services:
-#  - mysql
+services:
+  - mysql
 
 cache:
-  yarn: true
   directories:
     - $HOME/.composer/cache/files
     - $HOME/.symfony
@@ -22,7 +21,7 @@ before_install:
 install:
   - composer install
   - ./bin/phpunit install
-  #- ./bin/console doctrine:database:create
+  - ./bin/console doctrine:database:create
 
 script:
   - $HOME/.symfony/bin/symfony security:check
