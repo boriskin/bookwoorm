@@ -14,9 +14,11 @@ matrix:
   fast_finish: true
   include:
     - php: 7.4
-    - php: hhvm
+    - php: nightly
+      env:
+        - SYMFONY_VERSION="4.4.*" DB=mysql
   allow_failures:
-    - php: hhvm
+    - php: nightly
 
 before_install:
   - composer self-update
@@ -30,7 +32,7 @@ install:
 script:
   - ./bin/phpunit
   - composer validate --no-check-all --strict
-  #- symfony security:check
+  - symfony security:check
   - ./bin/console lint:yaml config --parse-tags
   - ./bin/console lint:twig templates --env=prod
   - ./bin/console lint:container
