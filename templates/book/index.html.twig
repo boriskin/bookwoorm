@@ -27,8 +27,7 @@
                 <td>{{ book.isbn }}</td>
                 <td>{{ book.year }}</td>
                 <td>
-                    <a href="{{ path('book_show', {'id': book.id}) }}">show</a>
-                    <a href="{{ path('book_edit', {'id': book.id}) }}">edit</a>
+                    <a href="{{ path('book_edit', {'id': book.id}) }}">Редактировать</a>
                 </td>
             </tr>
         {% else %}
@@ -40,6 +39,6 @@
     </table>
     </div>
 
-    <a class="btn btn-bookwoorm" href="{{ path('book_new') }}" role="button">Добавать новую</a>
+    <a class="btn btn-bookwoorm" href="{{ path('book_new') }}" role="button">Добавать книгу</a>
 </div>
 {% endblock %}
