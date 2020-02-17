@@ -44,6 +44,7 @@ deploy:
   cleanup: true
   run:
     - ./bin/console doctrine:migrations:migrate --no-interaction
+    - ./bin/console doctrine:fix:load --no-interaction
 
 notifications:
   email: paboriskin@gmail.com
