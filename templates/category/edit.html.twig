@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Редактировать категорию{% endblock %}
+
+{% block body %}
+    <h1>Редактировать категорию</h1>
+
+    {{ include('category/_form.html.twig', {'button_label': 'Обновить'}) }}
+
+    <a href="{{ path('category_index') }}">Вернуться к списку</a>
+
+{% endblock %}
