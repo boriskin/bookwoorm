@@ -61,7 +61,7 @@ class ConstraintsEmailValidatorTest extends ConstraintValidatorTestCase
     {
         yield ['valid1@yandex.ru'];
         yield ['valid2@google.com'];
-        yield ['valid3@localhost'];
+        yield ['valid3@mail.ru'];
         yield ['valid4@ascc.team'];
     }
 
