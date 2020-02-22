@@ -7,7 +7,7 @@
 
 namespace App\Entity;
 
-use App\Validator\Constraints as SberbankAssert;
+use App\Validator\Constraints as App;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -34,11 +34,12 @@ class Contact
      * @ORM\Column(type="string", length=255)
      *
      * @Assert\Email(
-     *     message = "Не является адресом электронной почты!",
+     *     message = "Значение {{ value }} не является действительным!",
      *     normalizer = "strtolower",
      *     mode = "strict"
      * )
-     * @SberbankAssert\ConstraintSberbank()
+     *
+     * @App\ConstraintsEmail()
      */
     private $email;
 
@@ -84,7 +85,7 @@ class Contact
 
     public function setEmail(string $email): self
     {
-        $this->email = $email;
+        $this->email = mb_strtolower($email);
 
         return $this;
     }

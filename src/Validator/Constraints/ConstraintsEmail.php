@@ -12,7 +12,8 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class ConstraintSberbank extends Constraint
+class ConstraintsEmail extends Constraint
 {
-    public $message = 'Адрес "{{ string }}" запрещен: принадлежит Сбербанк!';
+    public $invalidMessage = 'Адрес "{{ value }}" сомнительный!';
+    public $banMessage = 'Адрес "{{ value }}" заблокирован!';
 }

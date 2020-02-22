@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * Это мой первый проект Symfony
+ * (c) Pavel Boriskin <paboriskin@gmail.com>
+ */
+
 namespace App\Controller;
 
 use App\Entity\Category;
@@ -42,8 +47,7 @@ class MainController extends AbstractController
         BookRepository $bookRepository,
         CategoryRepository $categoryRepository,
         SerializerInterface $serializer
-    )
-    {
+    ) {
         $this->entityManager = $entityManager;
         $this->bookRepository = $bookRepository;
         $this->categoryRepository = $categoryRepository;
@@ -58,29 +62,23 @@ class MainController extends AbstractController
      */
     public function getBooksAll()
     {
-
         try {
-
             $books = $this->bookRepository->findAll();
-            $data = $this->serializer->serialize($books,'json');
+            $data = $this->serializer->serialize($books, 'json');
             //$response = new JsonResponse(['message' => 'Привет!']);
             //$response->setEncodingOptions(JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
-           return new JsonResponse([
+            return new JsonResponse([
                 'success' => true,
-                'data'    => $data,
+                'data' => $data,
             ], Response::HTTP_OK);
-
         } catch (\Exception $exception) {
-
             return new JsonResponse([
                 'success' => false,
-                'code'    => $exception->getCode(),
+                'code' => $exception->getCode(),
                 'message' => $exception->getMessage(),
             ], Response::HTTP_BAD_REQUEST);
-
         }
-
     }
 
     /**
@@ -91,12 +89,11 @@ class MainController extends AbstractController
      */
     public function getCategoryAll()
     {
+        $category = $this->categoryRepository->findAll();
+        $data = $this->serializer->serialize($category, 'json');
+        $response = new JsonResponse($data);
+        //$response->setEncodingOptions(JSON_UNESCAPED_SLASHES);
 
-            $category = $this->categoryRepository->findAll();
-            $data = $this->serializer->serialize($category,'json');
-            $response = new JsonResponse($data);
-            //$response->setEncodingOptions(JSON_UNESCAPED_SLASHES);
-
-            return $response;
+        return $response;
     }
 }
