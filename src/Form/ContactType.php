@@ -27,6 +27,7 @@ class ContactType extends AbstractType
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Отправить',
+                'attr' => ['class' => 'btn btn-bookwoorm'],
             ]);
     }
 

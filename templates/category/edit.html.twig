@@ -3,8 +3,15 @@
 {% block title %}Редактировать категорию{% endblock %}
 
 {% block body %}
-    <h1>Редактировать категорию</h1>
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+        <h1>Редактировать категорию</h1>
+        <a href="{{ path('category_index') }}"><i class="fas fa-undo"></i> Назад к списку</a>
 
-    {{ include('category/_form.html.twig', {'button_label': 'Обновить'}) }}
+        {{ include('default/_form.html.twig') }}
+    </div>
+    <div class="col-2"></div>
+</div>
 
 {% endblock %}

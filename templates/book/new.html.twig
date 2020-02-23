@@ -3,12 +3,14 @@
 {% block title %}Новая книга{% endblock %}
 
 {% block body %}
-    <h1>Новая книга</h1>
-    <div class="row mx-auto">
-        <div class="col-md-1"></div>
-            <div class="col-md-10">
-                {{ include('book/_form.html.twig') }}
-            </div>
-        <div class="col-md-1"></div>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+
+            <h1>Новая книга</h1>
+
+            {{ include('default/_form.html.twig') }}
+        </div>
+        <div class="col-2"></div>
     </div>
 {% endblock %}

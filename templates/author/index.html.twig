@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Author index{% endblock %}
+{% block title %}Писатели{% endblock %}
 
 {% block body %}
-    <h1>Author index</h1>
-
+<div class="container">
+    <h1>Писатели</h1>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>FirstName</th>
-                <th>MiddleName</th>
-                <th>LastName</th>
-                <th>actions</th>
+                <th>#</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Фамилия</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -23,17 +23,19 @@
                 <td>{{ author.middleName }}</td>
                 <td>{{ author.lastName }}</td>
                 <td>
-                    <a href="{{ path('author_show', {'id': author.id}) }}">show</a>
-                    <a href="{{ path('author_edit', {'id': author.id}) }}">edit</a>
+                    <a href="{{ path('author_edit', {'id': author.id}) }}"><i class="fas fa-edit"></i> Редактировать</a>
+                    <a href="{{ path('author_show', {'id': author.id}) }}"><i class="fas fa-eye"></i> Просмотреть</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Не найдено записей!</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('author_new') }}">Create new</a>
+    <a class="btn btn-bookwoorm" href="{{ path('author_new') }}" role="button"><i class="fas fa-plus"></i> Добавить писателя</a>
+
+</div>
 {% endblock %}

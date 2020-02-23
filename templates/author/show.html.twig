@@ -1,34 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Author{% endblock %}
+{% block title %}Писатель{% endblock %}
 
 {% block body %}
-    <h1>Author</h1>
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+        <h1>Писатель</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ author.id }}</td>
-            </tr>
-            <tr>
-                <th>FirstName</th>
-                <td>{{ author.firstName }}</td>
-            </tr>
-            <tr>
-                <th>MiddleName</th>
-                <td>{{ author.middleName }}</td>
-            </tr>
-            <tr>
-                <th>LastName</th>
-                <td>{{ author.lastName }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <a href="{{ path('author_index') }}"><i class="fas fa-undo"></i> Назад к списку</a>
 
-    <a href="{{ path('author_index') }}">back to list</a>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ author.id }}</td>
+                </tr>
+                <tr>
+                    <th>Имя</th>
+                    <td>{{ author.firstName }}</td>
+                </tr>
+                <tr>
+                    <th>Отчество</th>
+                    <td>{{ author.middleName }}</td>
+                </tr>
+                <tr>
+                    <th>Фамилия</th>
+                    <td>{{ author.lastName }}</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <a href="{{ path('author_edit', {'id': author.id}) }}">edit</a>
-
-    {{ include('author/_delete_form.html.twig') }}
+        {{ include('author/_delete_form.html.twig') }}
+    </div>
+    <div class="col-2"></div>
+</div>
 {% endblock %}

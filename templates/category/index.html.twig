@@ -10,9 +10,9 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
+                <th>#</th>
+                <th>Название категории</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -21,7 +21,7 @@
                 <td>{{ category.id }}</td>
                 <td>{{ category.name }}</td>
                 <td>
-                    <a href="{{ path('category_edit', {'id': category.id}) }}">Редактировать</a>
+                    <a href="{{ path('category_edit', {'id': category.id}) }}"><i class="fas fa-edit"></i> Редактировать</a>
                 </td>
             </tr>
         {% else %}
@@ -32,7 +32,7 @@
         </tbody>
     </table>
     </div>
-    <a class="btn btn-bookwoorm" href="{{ path('category_new') }}" role="button">Добавать новую</a>
+    <a class="btn btn-bookwoorm" href="{{ path('category_new') }}" role="button"><i class="fas fa-plus"></i> Добавить катерогию</a>
 </div>
 
 {% endblock %}
