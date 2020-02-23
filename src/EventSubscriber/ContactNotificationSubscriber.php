@@ -15,20 +15,28 @@ use Symfony\Component\Mime\Email;
 class ContactNotificationSubscriber implements EventSubscriberInterface
 {
     private $mailer;
+    private $senderEmail;
+    private $adminEmail;
 
-    public function __construct(MailerInterface $mailer)
+    public function __construct(MailerInterface $mailer, $senderEmail, $adminEmail)
     {
         $this->mailer = $mailer;
+        $this->senderEmail = $senderEmail;
+        $this->adminEmail = $adminEmail;
     }
 
     public function onContactSubmittedEvent(ContactFormSubmittedEvent $event): void
     {
-        //TODO: Янедекс прикрутить и переменные from/to вынести в файл.env
+        $contact = $event->getContact();
+
         $email = (new Email())
-            ->from('from@aa.aa')
-            ->to('to@bb.bb')
-            ->subject('Тема')
-            ->html('Тело сообщения')
+            ->from($this->senderEmail)
+            //пока не капчи не буду на из формы отправлять, только админу
+            //->to($contact->getEmail())
+            ->to($this->adminEmail)
+            //->bcc($this->adminEmail)
+            ->subject('Обратная связь')
+            ->html('Привет, ' . $contact->getName() . '('.$contact->getEmail(). ')  ! Спасибо за внимание.')
         ;
 
         $this->mailer->send($email);

@@ -4,6 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    app.email_sender.notify: '%env(APP_MAILER_SENDER)%'
+    app.email_admin:         '%env(APP_MAILER_ADMIN)%'
 
 services:
     # default configuration for services in *this* file
@@ -35,3 +37,9 @@ services:
                 entity: 'App\Entity\Contact'
                 lazy: true
                 entity_manager: 'default'
+
+
+    App\EventSubscriber\ContactNotificationSubscriber:
+        arguments:
+            $senderEmail: '%app.email_sender.notify%'
+            $adminEmail:  '%app.email_admin%'
