@@ -37,7 +37,7 @@ class Author
     private $lastName;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Book", mappedBy="authors")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Book", mappedBy="author")
      */
     private $books;
 
