@@ -7,15 +7,19 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\TimeStampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BookRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Book
 {
+    use TimeStampableTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

@@ -2,16 +2,19 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\TimeStampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AuthorRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Author
 {
+    use TimeStampableTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

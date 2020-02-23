@@ -4,7 +4,9 @@
 
 {% block body %}
 <div class="container">
+    <div class="row">
     <h1>Писатели</h1>
+
     <table class="table">
         <thead>
             <tr>
@@ -34,8 +36,7 @@
         {% endfor %}
         </tbody>
     </table>
-
+    </div>
     <a class="btn btn-bookwoorm" href="{{ path('author_new') }}" role="button"><i class="fas fa-plus"></i> Добавить писателя</a>
-
 </div>
 {% endblock %}
