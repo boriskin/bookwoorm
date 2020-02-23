@@ -7,6 +7,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Author;
 use App\Entity\Book;
 use App\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -16,17 +17,32 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        $this->LoadAuthors($manager);
         $this->loadCategories($manager);
         $this->loadBooks($manager);
     }
 
     private function loadCategories(ObjectManager $manager): void
     {
-        foreach ($this->getData() as $name) {
+        foreach ($this->getCategory() as $name) {
             $category = new Category();
             $category->setName($name);
             $manager->persist($category);
-            $this->addReference($name, $category);
+            $this->addReference('cat-'. $name, $category);
+        }
+
+        $manager->flush();
+    }
+
+    private function LoadAuthors(ObjectManager $manager): void
+    {
+        foreach ($this->getAuthors() as $key => $item) {
+            $author = new Author();
+            $author->setFirstName($item['firstName']);
+            $author->setMiddleName($item['middleName']);
+            $author->setLastName($item['lastName']);
+            $manager->persist($author);
+            $this->addReference('author-'. $key, $author);
         }
 
         $manager->flush();
@@ -36,18 +52,23 @@ class AppFixtures extends Fixture
     {
         for ($i = 0; $i < 200; ++$i) {
             $book = new Book();
-            $book->setCategory($this->getReference($this->getData()[rand(0, 5)]));
+            $book->setCategory($this->getReference('cat-' . $this->getCategory()[rand(0, count($this->getCategory()) - 1)]));
             $book->setName('Книга '.$i);
             $book->setYear(rand(1900, 2020));
             $book->setPages(rand(10, 500));
             $book->setIsbn(rand(1, 100) * 10000000 + rand(1, 9));
+            $book->addAuthor($this->getReference('author-' . rand(0, count($this->getAuthors()) - 1)));
+            //добавим каждой 5 книге еще одного автора - Иванова Ивана Ивановича
+            if (($i % 5) == 0) {
+                $book->addAuthor($this->getReference('author-0'));
+            }
             $manager->persist($book);
         }
 
         $manager->flush();
     }
 
-    private function getData(): array
+    private function getCategory(): array
     {
         return [
             'Фантастика',
@@ -55,7 +76,54 @@ class AppFixtures extends Fixture
             'Наука',
             'Детектив',
             'Учебник',
-            'test',
+            'Детская',
+        ];
+    }
+
+    private function getAuthors(): array
+    {
+        return [
+            [
+                'firstName' => 'Иван',
+                'middleName' => 'Иванович',
+                'lastName' => 'Иванов',
+            ],
+            [
+                'firstName' => 'Александр',
+                'middleName' => 'Сергеевич',
+                'lastName' => 'Пушкин',
+            ],
+            [
+                'firstName' => 'Иван',
+                'middleName' => 'Андреевич',
+                'lastName' => 'Крылов',
+            ],
+            [
+                'firstName' => 'Фёдор',
+                'middleName' => 'Михайлович',
+                'lastName' => 'Достоевский',
+            ],
+            [
+                'firstName' => 'Иван',
+                'middleName' => 'Сергеевич',
+                'lastName' => 'Тургенев',
+            ],
+            [
+                'firstName' => 'Марк',
+                'middleName' => '',
+                'lastName' => 'Твен',
+            ],
+            [
+                'firstName' => 'Виктор',
+                'middleName' => '',
+                'lastName' => 'Гюго',
+            ],
+            [
+                'firstName' => 'Жюль',
+                'middleName' => '',
+                'lastName' => 'Верн',
+            ],
+
         ];
     }
 }
