@@ -8,7 +8,6 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
-use App\Events\ContactFormSubmittedEvent;
 use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -21,7 +20,7 @@ class ContactController extends AbstractController
     /**
      * @Route("/contact", methods="GET|POST", name="contact")
      */
-    public function contactNew(Request $request, EventDispatcherInterface $eventDispatcher): Response
+    public function contactNew(Request $request): Response
     {
         //создаем объект Contact
         $contact = new Contact();
@@ -39,8 +38,6 @@ class ContactController extends AbstractController
 
             //оповещаем клиента
             $this->addFlash('success', 'Успешно отправлено');
-            //событие произошло
-            $eventDispatcher->dispatch(new ContactFormSubmittedEvent($contact));
 
             return $this->redirectToRoute('contact_thanks');
         }

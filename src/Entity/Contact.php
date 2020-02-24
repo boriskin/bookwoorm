@@ -14,6 +14,7 @@ use EWZ\Bundle\RecaptchaBundle\Validator\Constraints as Recaptcha;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContactRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Contact
 {
@@ -118,5 +119,14 @@ class Contact
         $this->publishedAt = $publishedAt;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function updateTimestamps(): void
+    {
+        $now = new \DateTime();
+        $this->setPublishedAt($now);
     }
 }
