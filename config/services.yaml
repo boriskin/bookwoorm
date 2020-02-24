@@ -6,6 +6,7 @@
 parameters:
     app.email_sender.notify: '%env(APP_MAILER_SENDER)%'
     app.email_admin:         '%env(APP_MAILER_ADMIN)%'
+    google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
 
 services:
     # default configuration for services in *this* file

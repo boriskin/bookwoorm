@@ -31,12 +31,9 @@ class ContactNotificationSubscriber implements EventSubscriberInterface
 
         $email = (new Email())
             ->from($this->senderEmail)
-            //пока не капчи не буду на из формы отправлять, только админу
-            //->to($contact->getEmail())
-            ->to($this->adminEmail)
-            //->bcc($this->adminEmail)
-            ->subject('Обратная связь')
-            ->html('Привет, ' . $contact->getName() . '('.$contact->getEmail(). ')  ! Спасибо за внимание.')
+            ->to($contact->getEmail())
+            ->subject('Обратная связь bookwoorm')
+            ->html('Привет, ' . $contact->getName() . '! Спасибо Вам огромное, что уделили время и оставили обратную связь.')
         ;
 
         $this->mailer->send($email);

@@ -10,6 +10,7 @@ namespace App\Entity;
 use App\Validator\Constraints as App;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints as Recaptcha;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContactRepository")
@@ -60,6 +61,11 @@ class Contact
      * @ORM\Column(type="datetime")
      */
     private $publishedAt;
+
+    /**
+     * @Recaptcha\IsTrue
+     */
+    public $recaptcha;
 
     public function getId(): ?int
     {
