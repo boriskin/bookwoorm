@@ -13,7 +13,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
-use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue as RecaptchaTrue;
 
 class ContactType extends AbstractType
 {
@@ -28,13 +27,13 @@ class ContactType extends AbstractType
                 'label' => 'Сообщение',
             ])
             ->add('recaptcha', EWZRecaptchaType::class, [
-                'label' => 'Проверка',
+                'label' => false,
                 'language' => 'ru',
                 'attr' => [
                     'options' => [
                         'theme' => 'light',
                         'type' => 'image',
-                        'size' => 'normal'
+                        'size' => 'small'
                     ]
                 ]
             ])
