@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/book")
@@ -23,10 +24,18 @@ class BookController extends AbstractController
     /**
      * @Route("/", name="book_index", methods={"GET"})
      */
-    public function index(BookRepository $bookRepository): Response
+    public function index(BookRepository $bookRepository, Request $request, PaginatorInterface $paginator): Response
     {
+
+        $queryBuilder = $bookRepository->findAll();
+        $pagination = $paginator->paginate(
+            $queryBuilder, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
+
         return $this->render('book/index.html.twig', [
-            'books' => $bookRepository->findAll(),
+            'pagination' => $pagination,
         ]);
     }
 

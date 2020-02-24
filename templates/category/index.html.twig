@@ -12,11 +12,11 @@
             <tr>
                 <th>#</th>
                 <th>Название категории</th>
-                <th></th>
+                <th><a class="btn btn-bookwoorm" href="{{ path('category_new') }}" role="button"><i class="fas fa-plus"></i> Добавить катерогию</a></th>
             </tr>
         </thead>
         <tbody>
-        {% for category in categories %}
+        {% for category in pagination %}
             <tr>
                 <td>{{ category.id }}</td>
                 <td>{{ category.name }}</td>
@@ -31,8 +31,10 @@
         {% endfor %}
         </tbody>
     </table>
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
     </div>
-    <a class="btn btn-bookwoorm" href="{{ path('category_new') }}" role="button"><i class="fas fa-plus"></i> Добавить катерогию</a>
 </div>
 
 {% endblock %}

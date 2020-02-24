@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/author")
@@ -18,10 +19,17 @@ class AuthorController extends AbstractController
     /**
      * @Route("/", name="author_index", methods={"GET"})
      */
-    public function index(AuthorRepository $authorRepository): Response
+    public function index(AuthorRepository $authorRepository, Request $request, PaginatorInterface $paginator): Response
     {
+        $queryBuilder = $authorRepository->findAll();
+        $pagination = $paginator->paginate(
+            $queryBuilder, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
+        );
+
         return $this->render('author/index.html.twig', [
-            'authors' => $authorRepository->findAll(),
+            'pagination' => $pagination,
         ]);
     }
 
@@ -78,17 +86,4 @@ class AuthorController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="author_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Author $author): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$author->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($author);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('author_index');
-    }
-}
+ }

@@ -14,11 +14,11 @@
                 <th>Имя</th>
                 <th>Отчество</th>
                 <th>Фамилия</th>
-                <th></th>
+                <th><a class="btn btn-bookwoorm" href="{{ path('author_new') }}" role="button"><i class="fas fa-plus"></i> Добавить писателя</a></th>
             </tr>
         </thead>
         <tbody>
-        {% for author in authors %}
+        {% for author in pagination %}
             <tr>
                 <td>{{ author.id }}</td>
                 <td>{{ author.firstName }}</td>
@@ -36,7 +36,9 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
     </div>
-    <a class="btn btn-bookwoorm" href="{{ path('author_new') }}" role="button"><i class="fas fa-plus"></i> Добавить писателя</a>
+    </div>
 </div>
 {% endblock %}
