@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Book{% endblock %}
+{% block title %}Информация о книге{% endblock %}
 
 {% block body %}
 <div class="row">
     <div class="col-2"></div>
     <div class="col-8">
-        <h1>Book</h1>
+        <h1>Информация о книге</h1>
 
         <a href="{{ path('book_index') }}"><i class="fas fa-undo"></i> Назад к списку</a>
 
@@ -42,6 +42,14 @@
                 <tr>
                     <th>Категория</th>
                     <td>{{ book.category.name }}</td>
+                </tr>
+                <tr>
+                    <th>Дата-время создания</th>
+                    <td>{{ book.createdAt is empty ? "" : book.createdAt|date('Y-m-d H:i:s P(\T)', "Europe/Moscow") }}</td>
+                </tr>
+                <tr>
+                    <th>Дата-время обновления</th>
+                    <td>{{ book.updatedAt is empty ? "" : book.updatedAt|date('Y-m-d H:i:s P(\T)', "Europe/Moscow") }}</td>
                 </tr>
             </tbody>
         </table>

@@ -1,15 +1,20 @@
 <?php
 
+/*
+ * Это мой первый проект Symfony
+ * (c) Pavel Boriskin <paboriskin@gmail.com>
+ */
+
 namespace App\Controller;
 
 use App\Entity\Author;
 use App\Form\AuthorType;
 use App\Repository\AuthorRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/author")
@@ -85,5 +90,4 @@ class AuthorController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
- }
+}

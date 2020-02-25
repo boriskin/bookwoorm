@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * Это мой первый проект Symfony
+ * (c) Pavel Boriskin <paboriskin@gmail.com>
+ */
+
 namespace App\Form;
 
 use App\Entity\Author;
@@ -12,13 +17,13 @@ class AuthorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName', null,[
+            ->add('firstName', null, [
                     'label' => 'Имя',
                 ])
-            ->add('middleName', null,[
+            ->add('middleName', null, [
                 'label' => 'Отчество',
             ])
-            ->add('lastName', null,[
+            ->add('lastName', null, [
                 'label' => 'Фамилия',
             ])
         ;

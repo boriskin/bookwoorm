@@ -26,9 +26,9 @@ $(document).ready(function() {
 });
 
 jQuery(function($) {
-    var path = window.location.href;
+    var path = window.location.pathname;
     $('li a').each(function() {
-        if (this.href === path) {
+        if (this.pathname === path) {
             $(this).addClass('active');
         }
     });

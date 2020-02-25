@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * Это мой первый проект Symfony
+ * (c) Pavel Boriskin <paboriskin@gmail.com>
+ */
+
 namespace App\Entity\Traits;
 
 use DateTime;
@@ -7,8 +12,7 @@ use DateTimeInterface;
 use Exception;
 
 /**
- * Trait TimeStampableTrait
- * @package App\Entity\Trait
+ * Trait TimeStampableTrait.
  */
 trait TimeStampableTrait
 {
@@ -23,7 +27,6 @@ trait TimeStampableTrait
     private $updatedAt;
 
     /**
-     * @return DateTimeInterface|null
      * @throws Exception
      */
     public function getCreatedAt(): ?DateTimeInterface
@@ -32,7 +35,6 @@ trait TimeStampableTrait
     }
 
     /**
-     * @param DateTimeInterface $createdAt
      * @return $this
      */
     public function setCreatedAt(DateTimeInterface $createdAt): self
@@ -43,7 +45,6 @@ trait TimeStampableTrait
     }
 
     /**
-     * @return DateTimeInterface|null
      * @throws Exception
      */
     public function getUpdatedAt(): ?DateTimeInterface
@@ -52,7 +53,6 @@ trait TimeStampableTrait
     }
 
     /**
-     * @param DateTimeInterface $updatedAt
      * @return $this
      */
     public function setUpdatedAt(DateTimeInterface $updatedAt): self
@@ -70,7 +70,7 @@ trait TimeStampableTrait
     {
         $now = new DateTime();
         $this->setUpdatedAt($now);
-        if ($this->getId() === null) {
+        if (null === $this->getId()) {
             $this->setCreatedAt($now);
         }
     }

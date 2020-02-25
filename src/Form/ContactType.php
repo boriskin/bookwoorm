@@ -8,11 +8,11 @@
 namespace App\Form;
 
 use App\Entity\Contact;
+use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
 
 class ContactType extends AbstractType
 {
@@ -33,9 +33,9 @@ class ContactType extends AbstractType
                     'options' => [
                         'theme' => 'light',
                         'type' => 'image',
-                        'size' => 'small'
-                    ]
-                ]
+                        'size' => 'small',
+                    ],
+                ],
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Отправить',

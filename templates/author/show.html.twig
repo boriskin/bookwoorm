@@ -28,6 +28,14 @@
                     <th>Фамилия</th>
                     <td>{{ author.lastName }}</td>
                 </tr>
+                <tr>
+                    <th>Дата-время создания</th>
+                    <td>{{ author.createdAt is empty ? "" : author.createdAt|date('Y-m-d H:i:s P(\T)', "Europe/Moscow") }}</td>
+                </tr>
+                <tr>
+                    <th>Дата-время обновления</th>
+                    <td>{{ author.updatedAt is empty ? "" : author.updatedAt|date('Y-m-d H:i:s P(\T)', "Europe/Moscow") }}</td>
+                </tr>
             </tbody>
         </table>
 

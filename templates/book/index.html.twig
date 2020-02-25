@@ -4,45 +4,51 @@
 
 {% block body %}
 <div class="container">
-    <div class="row">
-    <h1>Библиотека (общее кол-во: {{ pagination.getTotalItemCount }})</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Название книги</th>
-                <th>Категория</th>
-                <th>Автор</th>
-                <th><a class="btn btn-bookwoorm" href="{{ path('book_new') }}" role="button"><i class="fas fa-plus"></i> Добавить книгу</a></th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for book in pagination %}
-            <tr>
-                <td>{{ book.id }}</td>
-                <td>{{ book.name }}</td>
-                <td>{{ book.category.name }}</td>
-                <td>
-                    {% for author in book.author %}
-                        <li>{{ author.FirstName }} {{ author.MiddleName }} {{ author.LastName }}</li>
-                    {% endfor %}
-                </td>
-                <td>
-                    <a href="{{ path('book_edit', {'id': book.id}) }}"><i class="fas fa-edit"></i> Редактировать</a>
-                    <a href="{{ path('book_show', {'id': book.id}) }}"><i class="fas fa-eye"></i> Просмотреть</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">Не найдено записей!</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <div class="navigation">
-        {{ knp_pagination_render(pagination) }}
-    </div>
+    <div class="row shadow-sm p-3 mb-5 bg-white rounded">
+        <table class="table table-hover">
+            <caption>Список книг (всего {{ pagination.getTotalItemCount }})</caption>
+            <thead class="thead-light">
+                <tr>
+                    <th>{{ knp_pagination_sortable(pagination, '#', 'id') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Название книги', 'name') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Категория', 'category.name') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Автор', 'author[0].LastName') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Год издания', 'year') }}</th>
+                    <th class="text-center">Действие</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for book in pagination %}
+                <tr>
+                    <td>{{ book.id }}</td>
+                    <td>{{ book.name }}</td>
+                    <td>{{ book.category.name }}</td>
+                    <td>
+                        {% for author in book.author %}
+                            <li>{{ author.FirstName }} {{ author.MiddleName }} {{ author.LastName }}</li>
+                        {% endfor %}
+                    </td>
+                    <td>{{ book.year }}</td>
+                    <td class="text-center">
+                        <a href="{{ path('book_edit', {'id': book.id}) }}"><i class="fas fa-edit"></i></a>
+                        <a href="{{ path('book_show', {'id': book.id}) }}"><i class="fas fa-eye"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">Не найдено записей!</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col">
+                <a class="btn btn-bookwoorm" href="{{ path('book_new') }}" role="button">Добавить</a>
+            </div>
+            <div class="col navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

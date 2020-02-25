@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * Это мой первый проект Symfony
+ * (c) Pavel Boriskin <paboriskin@gmail.com>
+ */
+
 namespace App\Entity;
 
 use App\Entity\Traits\TimeStampableTrait;
@@ -29,13 +34,11 @@ class Author
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
      */
     private $middleName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
      */
     private $lastName;
 

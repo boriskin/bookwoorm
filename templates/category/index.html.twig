@@ -4,35 +4,39 @@
 
 {% block body %}
 <div class="container">
-    <div class="row">
-    <h1>Категории</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Название категории</th>
-                <th><a class="btn btn-bookwoorm" href="{{ path('category_new') }}" role="button"><i class="fas fa-plus"></i> Добавить катерогию</a></th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for category in pagination %}
-            <tr>
-                <td>{{ category.id }}</td>
-                <td>{{ category.name }}</td>
-                <td>
-                    <a href="{{ path('category_edit', {'id': category.id}) }}"><i class="fas fa-edit"></i> Редактировать</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">Не найдено записей!</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-        <div class="navigation">
-            {{ knp_pagination_render(pagination) }}
+    <div class="row shadow-sm p-3 mb-5 bg-white rounded">
+        <table class="table table-hover">
+            <caption>Список категорий (всего {{ pagination.getTotalItemCount }})</caption>
+            <thead class="thead-light">
+                <tr>
+                    <th>{{ knp_pagination_sortable(pagination, '#', 'id') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Название категории', 'name') }}</th>
+                    <th class="text-center">Действие</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for category in pagination %}
+                <tr>
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.name }}</td>
+                    <td class="text-center">
+                        <a href="{{ path('category_edit', {'id': category.id}) }}"><i class="fas fa-edit"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Не найдено записей!</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col">
+                <a class="btn btn-bookwoorm" href="{{ path('category_new') }}" role="button">Добавить</a>
+            </div>
+            <div class="col navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>
         </div>
     </div>
 </div>

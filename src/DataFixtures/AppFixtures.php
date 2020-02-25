@@ -28,7 +28,7 @@ class AppFixtures extends Fixture
             $category = new Category();
             $category->setName($name);
             $manager->persist($category);
-            $this->addReference('cat-'. $name, $category);
+            $this->addReference('cat-'.$name, $category);
         }
 
         $manager->flush();
@@ -42,7 +42,7 @@ class AppFixtures extends Fixture
             $author->setMiddleName($item['middleName']);
             $author->setLastName($item['lastName']);
             $manager->persist($author);
-            $this->addReference('author-'. $key, $author);
+            $this->addReference('author-'.$key, $author);
         }
 
         $manager->flush();
@@ -52,14 +52,14 @@ class AppFixtures extends Fixture
     {
         for ($i = 0; $i < 200; ++$i) {
             $book = new Book();
-            $book->setCategory($this->getReference('cat-' . $this->getCategory()[rand(0, count($this->getCategory()) - 1)]));
+            $book->setCategory($this->getReference('cat-'.$this->getCategory()[rand(0, count($this->getCategory()) - 1)]));
             $book->setName('Книга '.$i);
             $book->setYear(rand(1900, 2020));
             $book->setPages(rand(10, 500));
             $book->setIsbn(rand(1, 100) * 10000000 + rand(1, 9));
-            $book->addAuthor($this->getReference('author-' . rand(0, count($this->getAuthors()) - 1)));
+            $book->addAuthor($this->getReference('author-'.rand(0, count($this->getAuthors()) - 1)));
             //добавим каждой 5 книге еще одного автора - Иванова Ивана Ивановича
-            if (($i % 5) == 0) {
+            if (0 === ($i % 5)) {
                 $book->addAuthor($this->getReference('author-0'));
             }
             $manager->persist($book);
@@ -123,7 +123,6 @@ class AppFixtures extends Fixture
                 'middleName' => '',
                 'lastName' => 'Верн',
             ],
-
         ];
     }
 }
