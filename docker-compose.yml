@@ -11,6 +11,8 @@ services:
         MYSQL_PASSWORD: "${MYSQL_DB_PASSWORD}"
       ports:
         - "${MYSQL_DB_PORT}:33060"
+      networks:
+        - internal
 
     nginx:
       image: nginx:alpine
@@ -24,17 +26,25 @@ services:
       depends_on:
        - app
        - encore
+      networks:
+        - internal
 
     app:
       build: docker/php-fpm
       container_name: app
       working_dir: /var/www/
       volumes:
-        - ./:/var/www
+        - ./:/var/www:cached
+        - ./var/cache/:/var/www/var/cache:delegated
       ports:
         - "9000:9000"
+      environment:
+        PHP_IDE_CONFIG: "serverName=docker"
       depends_on:
         - mysql
+      networks:
+        - internal
+      restart: always
 
     encore:
       image: node:13-alpine
@@ -44,4 +54,14 @@ services:
         - ./:/app
       ports:
         - "8080:8080"
+      networks:
+        - internal
       command: ["yarn", "dev-server", "--host=0.0.0.0"]
+
+networks:
+  internal:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.220.0/28

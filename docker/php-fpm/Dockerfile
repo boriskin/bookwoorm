@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
+    libicu-dev \
     zip \
     wget\
     unzip
@@ -15,7 +16,22 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring xml intl
+RUN docker-php-ext-install pdo_mysql mbstring xml intl \
+    && pecl install apcu \
+    && pecl install xdebug \
+    && pecl clear-cache
+
+# Enable PHP extensions
+RUN docker-php-ext-enable intl apcu opcache xdebug
+# Xdebug config
+RUN echo xdebug.remote_enable=1 >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo xdebug.remote_port=9090 >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo xdebug.idekey=PHPSTORM >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo xdebug.remote_host=host.docker.internal >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo xdebug.cli_color=1  >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+#    && echo xdebug.file_link_format=phpstorm://open?%f:%l >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+ADD ./php.ini /usr/local/etc/php/php.ini
 
 # Get latest Composer
 #COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
