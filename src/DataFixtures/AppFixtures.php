@@ -10,6 +10,7 @@ namespace App\DataFixtures;
 use App\Entity\Author;
 use App\Entity\Book;
 use App\Entity\Category;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -17,9 +18,31 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        $this->LoadUsers($manager);
         $this->LoadAuthors($manager);
         $this->loadCategories($manager);
         $this->loadBooks($manager);
+    }
+
+    private function loadUsers(ObjectManager $manager): void
+    {
+        $user = new User();
+        $user->setUsername('user');
+        $user->setEmail('user@bookwoorm.app');
+        $user->setPlainPassword('user');
+        $user->setEnabled(true);
+        $user->setRoles(array('ROLE_USER'));
+        $manager->persist($user);
+
+        $admin = new User();
+        $admin->setUsername('admin');
+        $admin->setEmail('admin@bookwoorm.app');
+        $admin->setPlainPassword('admin');
+        $admin->setEnabled(true);
+        $admin->setRoles(array('ROLE_SUPER_ADMIN'));
+        $manager->persist($admin);
+
+        $manager->flush();
     }
 
     private function loadCategories(ObjectManager $manager): void

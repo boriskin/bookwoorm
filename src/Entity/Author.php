@@ -74,7 +74,7 @@ class Author
         return $this->middleName;
     }
 
-    public function setMiddleName(string $middleName): self
+    public function setMiddleName(? string $middleName): self
     {
         $this->middleName = $middleName;
 

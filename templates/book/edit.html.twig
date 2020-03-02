@@ -10,7 +10,18 @@
         <h1>Редактировать книгу</h1>
         <a href="{{ path('book_index') }}"><i class="fas fa-undo"></i> Назад к списку</a>
 
-        {{ include('default/_form.html.twig') }}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+
+{#        {% for author in form.author %}#}
+{#            <div class="row">#}
+{#                <li>{{ form_row(author.firstName) }}</li>#}
+{#                <li>{{ form_row(author.middleName) }}</li>#}
+{#                <li>{{ form_row(author.lastName) }}</li>#}
+{#            </div>#}
+{#        {% endfor %}#}
+        <button class="btn btn-bookwoorm"><i class="fas fa-save"></i> {{ button_label|default('Сохранить') }}</button>
+        {{ form_end(form) }}
 
     </div>
     <div class="col-2"></div>
