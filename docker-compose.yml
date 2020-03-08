@@ -10,7 +10,7 @@ services:
         MYSQL_USER: "${MYSQL_DB_USERNAME}"
         MYSQL_PASSWORD: "${MYSQL_DB_PASSWORD}"
       ports:
-        - "${MYSQL_DB_PORT}:33060"
+        - "${MYSQL_DB_PORT}:3306"
       networks:
         - internal
 
@@ -32,10 +32,11 @@ services:
     app:
       build: docker/php-fpm
       container_name: app
-      working_dir: /var/www/
+      working_dir: /app
       volumes:
-        - ./:/var/www:cached
-        - ./var/cache/:/var/www/var/cache:delegated
+        - ./:/app:cached
+        - ./var/cache/:/app/var/cache:delegated
+        - ./vendor/:/app/vendor:delegated
       ports:
         - "9000:9000"
       environment:
@@ -51,7 +52,7 @@ services:
       container_name: encore
       working_dir: /app
       volumes:
-        - ./:/app
+        - ./:/app:cached
       ports:
         - "8080:8080"
       networks:

@@ -23,6 +23,35 @@
                 font-size: 3.5rem;
             }
         }
+        .form-signin {
+            width: 100%;
+            max-width: 330px;
+            padding: 15px;
+            margin: auto;
+        }
+        .form-signin .checkbox {
+            font-weight: 400;
+        }
+        .form-signin .form-control {
+            position: relative;
+            box-sizing: border-box;
+            height: auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .form-signin .form-control:focus {
+            z-index: 2;
+        }
+        .form-signin input[type="email"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        .form-signin input[type="password"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
     </style>
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
@@ -57,21 +86,17 @@
                             <i class="fas fa-user"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarUser">
-                            <h6 class="dropdown-header">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</h6>
-                            <a class="dropdown-item" href="{{ path('fos_user_profile_show') }}"><i class="fas fa-cog"></i>
+                            <h6 class="dropdown-header">{{ app.user.username }}</h6>
+                            <a class="dropdown-item" href="#"><i class="fas fa-cog"></i>
                                 Профиль
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}"><i class="fas fa-sign-out-alt"></i>
-                                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                            </a>
+                            <a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i> Выйти</a>
                         </div>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('fos_user_security_login') }}"><i class="fas fa-sign-in-alt"></i>
-                            {{ 'layout.login'|trans({}, 'FOSUserBundle') }}
-                        </a>
+                        <a class="nav-link" href="{{ path('app_login') }}"><i class="fas fa-sign-in-alt"></i> Войти</a>
                     </li>
                 {% endif %}
             </ul>
